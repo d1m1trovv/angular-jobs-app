@@ -1,0 +1,7 @@
+<app-filter-buttons-section
+  (typeSelected)="getJobsByType($event)"
+  (categorySelected)="getJobsByCategory($event)"
+  [jobTypes]="jobTypes"
+  [jobCategories]="jobCategories"
+></app-filter-buttons-section>
+<app-jobs-card-list-view [jobs]="currentJobs"></app-jobs-card-list-view>

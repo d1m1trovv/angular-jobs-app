@@ -1,0 +1,45 @@
+<div class="profile-page">
+  <div class="main main-raised">
+    <div class="profile-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile">
+              <div class="avatar">
+                <img src="https://i.ibb.co/N6FtkgK/briefcase.png" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+              </div>
+              <div class="name">
+                <h3 class="title">{{job.title}}</h3>
+                <h6>{{job.organization}}</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="description text-center">
+          <p>{{job.description}}</p>
+          <br>
+          <p>Likes: {{job.likes}}</p>
+          <br>
+          <ng-container *ngIf="hasUserApplied">
+          <p style="color: #872642; font-size: 45px">You have applied for this job</p>
+          <p style="color: #872642; font-size: 45px">Status: </p>
+          </ng-container>
+        </div>
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile-tabs">
+              <div class="three-inline-buttons">
+                  <button class="butn btn-1 btn-sep icon-send" (click)="onApply()" *ngIf="!hasUserApplied">APPLY</button>
+                <button class="butn btn-1 btn-sep icon-send ml-2 mb-5" (click)="onLike()">
+                  <ng-container *ngIf="hasUserLiked">Unlike</ng-container>
+                  <ng-container *ngIf="!hasUserLiked">Like</ng-container>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

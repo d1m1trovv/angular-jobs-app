@@ -1,0 +1,33 @@
+<div class="text-center mt-5 mb-5">
+<div ngbDropdown class="d-inline-block m-lg-auto">
+  <button class="customBtn" id="dropdownMenuButton" ngbDropdownToggle>BY CATEGORY</button>
+  <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+    <div *ngFor="let jobCategory of jobCategories">
+      <button
+        ngbDropdownItem
+        (click)="this.categorySelected.emit(jobCategory.name)"
+      >
+        {{jobCategory.name}}
+      </button>
+    </div>
+  </div>
+</div>
+  <div ngbDropdown class="d-inline-block m-lg-auto">
+    <button class="customBtn ml-5" id="dropdownMenuButton2" ngbDropdownToggle>BY TYPE</button>
+    <div ngbDropdownMenu aria-labelledby="dropdownMenuButton2">
+      <div *ngFor="let jobType of jobTypes">
+      <button
+        ngbDropdownItem
+        (click)="this.typeSelected.emit(jobType.name)"
+      >
+        {{jobType.name}}
+      </button>
+      </div>
+    </div>
+  </div>
+  <div ngbDropdown class="d-inline-block m-lg-auto">
+    <button class="customBtn ml-5" id="dropdownMenuButton3" ngbDropdownToggle>BY COMPANY</button>
+    <div ngbDropdownMenu aria-labelledby="dropdownMenuButton3">
+    </div>
+  </div>
+</div>

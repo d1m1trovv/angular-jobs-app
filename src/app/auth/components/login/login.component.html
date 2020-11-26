@@ -1,0 +1,36 @@
+<div class="panel-lite">
+  <div class="thumbur">
+    <div class="icon-lock"></div>
+  </div>
+  <h4>Sign in</h4>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <input class="form-control"
+           required="required"
+           id="email"
+           formControlName="email"
+           type="text"
+    />
+    <label class="form-label"
+           for="email"
+    >
+      Email
+    </label>
+  </div>
+    <div class="form-group">
+      <input class="form-control"
+             required="required"
+             id="password"
+             formControlName="password"
+             type="text"
+      />
+      <label class="form-label"
+             for="password"
+      >
+        Password
+      </label>
+    </div>
+    <a href="#">Forgot Password ?  </a>
+  <button class="floating-btn" type="submit"><i class="icon-arrow"></i></button>
+  </form>
+</div>
