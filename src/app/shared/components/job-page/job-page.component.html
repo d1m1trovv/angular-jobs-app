@@ -28,12 +28,28 @@
         <div class="row">
           <div class="col-md-6 ml-auto mr-auto">
             <div class="profile-tabs">
-              <div class="three-inline-buttons">
-                  <button class="butn btn-1 btn-sep icon-send" (click)="onApply()" *ngIf="!hasUserApplied">APPLY</button>
-                <button class="butn btn-1 btn-sep icon-send ml-2 mb-5" (click)="onLike()">
-                  <ng-container *ngIf="hasUserLiked">Unlike</ng-container>
-                  <ng-container *ngIf="!hasUserLiked">Like</ng-container>
-                </button>
+              <div class="butn">
+                <a class="transparent" *ngIf="!isUserStandard" (click)="onRedirect('organization/my-jobs/edit/' + job.id)">
+                  <p>
+                    <span class="bg"></span>
+                    <span class="base"></span>
+                    <span class="text">Edit</span>
+                  </p>
+                </a>
+                <a class="transparent" *ngIf="!isUserStandard" (click)="onDelete(job.id)">
+                  <p>
+                    <span class="bg"></span>
+                    <span class="base"></span>
+                    <span class="text">Delete</span>
+                  </p>
+                </a>
+                <a class="transparent" *ngIf="isUserStandard">
+                  <p>
+                    <span class="bg"></span>
+                    <span class="base"></span>
+                    <span class="text">Like</span>
+                  </p>
+                </a>
               </div>
             </div>
           </div>

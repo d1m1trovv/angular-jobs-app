@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Job} from "../models/job.interface";
 import {AuthenticationService} from "../../../../auth/services/authentication.service";
 import {User} from "../../../../auth/models/user.interface";
@@ -33,6 +33,11 @@ export class JobCardItemComponent implements OnInit {
   }
 
   onReadMoreClick(): void{
-    this.router.navigate(['/main', 'jobs', this.job.id])
+    if(this.authenticationService.getLoggedUser().type === 'standard'){
+      this.router.navigate(['/main', 'jobs', this.job.id])
+    }
+    if(this.authenticationService.getLoggedUser().type === 'organization'){
+      this.router.navigate(['/organization', 'jobs', this.job.id])
+    }
   }
 }

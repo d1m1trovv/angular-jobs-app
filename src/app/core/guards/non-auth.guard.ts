@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import {CanActivate, Router} from '@angular/router';
-import {AuthenticationService} from "../authentication.service";
+import {CanActivate, CanLoad, Router} from '@angular/router';
+import {AuthenticationService} from "../../auth/services/authentication.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class NonAuthGuard implements CanActivate {
+export class NonAuthGuard implements CanLoad {
 
   constructor(private router: Router,
               private authService: AuthenticationService) {
   }
 
-  canActivate(): boolean {
+  canLoad(): boolean {
     const user = this.authService.getLoggedUser();
 
     if (user) {
-      this.router.navigate(['jobs']);
+      this.router.navigate(['main/jobs']);
 
       return false;
     }

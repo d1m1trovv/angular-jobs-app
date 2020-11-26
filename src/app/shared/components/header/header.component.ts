@@ -13,6 +13,7 @@ import has = Reflect.has;
 export class HeaderComponent implements OnInit, OnDestroy {
 
   isUserLoggedIn: boolean = false;
+  isUserStandard: boolean = false;
 
   destroy$ = new Subject<boolean>();
 
@@ -24,12 +25,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authenticationService.getIsUserLogged().pipe(
       takeUntil(this.destroy$)
     ).subscribe(hasLogged => {this.isUserLoggedIn = hasLogged; console.log(this.isUserLoggedIn)});
+
+    this.authenticationService.getIsUserStandard().pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(isStandard => this.isUserStandard = isStandard);
   }
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
-    console.log("ondestroy");
+
   }
 
   onRedirect(path: string): void {

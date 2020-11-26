@@ -5,14 +5,15 @@ import {Category} from "../../../../shared/components/jobs/models/category.inter
 import {Subject} from "rxjs";
 import {JobsService} from "../../../../shared/components/jobs/services/jobs.service";
 import {map, takeUntil} from "rxjs/operators";
-import {Application} from "../../../../shared/components/jobs/models/application.interface";
+import {AuthenticationService} from "../../../../auth/services/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-all-jobs-card-list',
-  templateUrl: './all-jobs-card-list.component.html',
-  styleUrls: ['./all-jobs-card-list.component.scss']
+  selector: 'app-organization-jobs-card-list',
+  templateUrl: './organization-jobs-card-list.component.html',
+  styleUrls: ['./organization-jobs-card-list.component.scss']
 })
-export class AllJobsCardListComponent implements OnInit {
+export class OrganizationJobsCardListComponent implements OnInit {
 
   selectedType: string;
   jobs: Job[];
@@ -22,7 +23,9 @@ export class AllJobsCardListComponent implements OnInit {
 
   destroy$ = new Subject<boolean>();
 
-  constructor(private jobsService: JobsService) {
+  constructor(private jobsService: JobsService,
+              private authenticationService: AuthenticationService,
+              private router: Router) {
     this.jobs = [];
     this.currentJobs = [];
     this.jobTypes = [];
@@ -38,12 +41,21 @@ export class AllJobsCardListComponent implements OnInit {
     this.jobsService.getJobs().pipe(
       takeUntil(this.destroy$)
     ).subscribe((response) => {
-      this.jobs = response[0];
-      this.currentJobs = response[0];
+      for(let job of response[0]){
+        if(job.organization === this.authenticationService.getLoggedUser().displayName){
+          this.jobs.push(job);
+          this.currentJobs.push(job);
+        }
+      }
       this.jobTypes = response[1];
       this.jobCategories = response[2];
     },(error => {
       console.log(error);
     }))
   }
+
+  onRedirect(path: string): void{
+    this.router.navigate([path]);
+  }
+
 }

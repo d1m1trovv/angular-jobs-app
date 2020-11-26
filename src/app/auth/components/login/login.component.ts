@@ -41,9 +41,18 @@ export class LoginComponent implements OnInit {
 
       console.log(response.email);
       this.authenticationService.setLoggedUser(response);
-      this.router.navigate(['main/jobs']);
+      this.checkType(response.type);
       console.log(response);
     });
+  }
+
+  checkType(type: string): void{
+    if(type === 'standard'){
+      this.router.navigate(['main/jobs']);
+    }
+    if(type === 'organization'){
+      this.router.navigate(['organization/jobs']);
+    }
   }
 
 }

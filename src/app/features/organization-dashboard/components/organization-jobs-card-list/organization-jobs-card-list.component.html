@@ -1,0 +1,19 @@
+<div class="heading">
+  <h1>Your jobs</h1>
+</div>
+<app-jobs-card-list
+  [jobs]="jobs"
+  [jobCategories]="jobCategories"
+  [jobTypes]="jobTypes"
+  [currentJobs]="jobs"
+></app-jobs-card-list>
+<div class="butn">
+  <a class="transparent" (click)="onRedirect('organization/my-jobs/create')">
+    <p>
+      <span class="bg"></span>
+      <span class="base"></span>
+      <span class="text">Post new job</span>
+    </p>
+  </a>
+</div>
+

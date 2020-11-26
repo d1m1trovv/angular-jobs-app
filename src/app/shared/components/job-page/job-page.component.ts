@@ -18,6 +18,7 @@ export class JobPageComponent implements OnInit, OnDestroy {
   currentUserId: number = 0;
   hasUserApplied: boolean = false;
   hasUserLiked: boolean = false;
+  isUserStandard: boolean = false;
 
   hasUserApplied$ = new BehaviorSubject<boolean>(false);
   hasUserLiked$ = new BehaviorSubject<boolean>(false);
@@ -39,6 +40,10 @@ export class JobPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.currentUserId = this.authenticationService.getLoggedUser().id!;
+
+    this.authenticationService.getIsUserStandard().pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(isStandard => this.isUserStandard = isStandard);
 
     this.activatedRoute.params.pipe(
       takeUntil(this.destroy$)
@@ -154,6 +159,20 @@ export class JobPageComponent implements OnInit, OnDestroy {
 
   getHasUserLiked(): Observable<boolean>{
     return this.hasUserLiked$.asObservable();
+  }
+
+  onRedirect(path: string): void{
+    this.router.navigate([path]);
+  }
+
+  onDelete(id: number): void{
+    this.jobsService.deleteJob(id).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
+      this.router.navigate(['organization/my-jobs'])
+    }, (error) => {
+      console.log(error);
+    });
   }
 
 }

@@ -26,11 +26,11 @@
   <div class="company-logo-img">
     <img src="https://i.ibb.co/N6FtkgK/briefcase.png" />
   </div>
-  <div class="job-title">{{job.title}}</div>
-  <div class="company-name">{{job.organization}}</div>
+  <div class="job-title">{{job.title}} at {{job.organization}}</div>
+  <div class="company-name">{{job.description.substring(0, 100)}}...</div>
   <div class="skills-container">
     <div class="skill ml-4">{{job.category}}</div>
-    <div class="skill ml-5">{{job.type}}</div>
+    <div class="skill ml-2">{{job.type}}</div>
   </div>
   <button class="save" (click)="onReadMoreClick()">Read more</button>
   <a (click)="onReadMoreClick()"></a>

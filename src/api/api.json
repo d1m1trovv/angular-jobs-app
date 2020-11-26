@@ -1,0 +1,166 @@
+{
+  "users": [
+    {
+      "displayName": "Admin",
+      "username": "AdminName",
+      "email": "admin123@abv.bg",
+      "password": "adminpass",
+      "id": 1
+    },
+    {
+      "displayName": "UserName",
+      "username": "UserName",
+      "email": "admintest@abv.bg",
+      "password": "userpass",
+      "confirmPassword": "userpass",
+      "id": 2
+    },
+    {
+      "displayName": "UserName2",
+      "username": "UserName2",
+      "email": "admintest@abv.bg",
+      "password": "123456",
+      "confirmPassword": "123456",
+      "id": 3
+    },
+    {
+      "displayName": "Organization",
+      "username": "Organization",
+      "email": "org@abv.bg",
+      "password": "orgpass",
+      "confirmPassword": "orgpass",
+      "type": "organization",
+      "id": 4
+    }
+  ],
+  "jobs": [
+    {
+      "id": 1,
+      "title": "Java developer",
+      "organization": "Microsoft",
+      "description": "We are looking for highly motivated developers ready to join our team. We are looking for highly motivated developers ready to join our team. We are looking for highly motivated developers ready to join our team. We are looking for highly motivated developers ready to join our team. We are looking for highly motivated developers ready to join our team. We are looking for highly motivated developers ready to join our team.",
+      "likes": 1,
+      "type": "Full-time",
+      "category": "Software development"
+    },
+    {
+      "id": 2,
+      "title": "C# developer",
+      "organization": "Microsoft",
+      "description": "We are looking for highly motivated developers ready to join our team.",
+      "likes": 0,
+      "type": "Full-time",
+      "category": "Software development"
+    },
+    {
+      "id": 3,
+      "title": "Angular developer",
+      "organization": "Oracle",
+      "description": "We are looking for highly motivated developers ready to join our team.",
+      "likes": 0,
+      "type": "Part-time",
+      "category": "Software development"
+    },
+    {
+      "id": 4,
+      "title": "Graphic Designer",
+      "organization": "Google",
+      "description": "We are looking for highly motivated developers ready to join our team.",
+      "likes": 0,
+      "type": "Remote",
+      "category": "Design"
+    },
+    {
+      "id": 5,
+      "title": "Web developer",
+      "organization": "Microsoft",
+      "description": "We are looking for highly motivated developers ready to join our team.",
+      "likes": 0,
+      "type": "Part-time",
+      "category": "Software development"
+    },
+    {
+      "id": 6,
+      "title": "React developer",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "type": "Part-time",
+      "category": "Software development",
+      "organization": "Organization",
+      "likes": 0
+    }
+  ],
+  "types": [
+    {
+      "id": 1,
+      "name": "All"
+    },
+    {
+      "id": 2,
+      "name": "Part-time"
+    },
+    {
+      "id": 3,
+      "name": "Remote"
+    },
+    {
+      "id": 1,
+      "name": "Full-time"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "All"
+    },
+    {
+      "id": 2,
+      "name": "Design"
+    },
+    {
+      "id": 3,
+      "name": "Administration"
+    },
+    {
+      "id": 4,
+      "name": "Real estate"
+    },
+    {
+      "id": 5,
+      "name": "Marketing"
+    },
+    {
+      "id": 6,
+      "name": "Engineering"
+    },
+    {
+      "id": 7,
+      "name": "Software development"
+    }
+  ],
+  "user_applications": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "job_id": 1,
+      "status": "Waiting"
+    },
+    {
+      "id": 2,
+      "user_id": 1,
+      "job_id": 2,
+      "status": "Waiting"
+    },
+    {
+      "user_id": 1,
+      "job_id": 4,
+      "id": 3,
+      "status": "Waiting"
+    },
+    {
+      "user_id": 1,
+      "job_id": 5,
+      "id": 4,
+      "status": "Waiting"
+    }
+  ]
+}

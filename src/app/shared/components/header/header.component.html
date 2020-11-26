@@ -7,11 +7,17 @@
     </div>
     <nav>
       <ul>
-        <ng-container *ngIf="isUserLoggedIn">
+        <ng-container *ngIf="isUserLoggedIn && isUserStandard">
           <li><a (click)="onRedirect('')">home</a></li>
           <li><a (click)="onRedirect('main/jobs')">jobs</a></li>
           <li><a (click)="onRedirect('main/profile')">profile</a></li>
           <li><a (click)="onRedirect('main/applications')">Applications</a></li>
+        </ng-container>
+        <ng-container *ngIf="isUserLoggedIn && !isUserStandard">
+          <li><a (click)="onRedirect('')">home</a></li>
+          <li><a (click)="onRedirect('organization/jobs')">jobs</a></li>
+          <li><a (click)="onRedirect('organization/profile')">profile</a></li>
+          <li><a (click)="onRedirect('organization/my-jobs')">My jobs</a></li>
         </ng-container>
         <ng-container *ngIf="!isUserLoggedIn">
           <li><a (click)="onRedirect('auth/sign-up')">Sign up</a></li>

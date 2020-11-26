@@ -1,0 +1,70 @@
+<div class="panel-lite">
+  <div class="thumbur">
+    <div class="icon-lock"></div>
+  </div>
+  <h4>{{!job.id ? 'Post new job' : 'Update job'}}</h4>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <input class="form-control"
+             required="required"
+             id="title"
+             formControlName="title"
+             type="text"
+      />
+      <label class="form-label"
+             for="title"
+      >
+        Title
+      </label>
+    </div>
+    <div class="form-group">
+      <input class="form-control"
+             required="required"
+             id="description"
+             formControlName="description"
+             type="text"
+      />
+      <label class="form-label"
+             for="description"
+      >
+        Description
+      </label>
+    </div>
+    <div class="form-group">
+      <select class="form-control"
+             required="required"
+             id="type"
+             formControlName="type"
+             type="text"
+      >
+        <option *ngFor="let type of jobTypes" [ngValue]="type.name">
+          {{type.name}}
+        </option>
+      </select>
+      <label class="form-label"
+             for="type"
+      >
+        Type
+      </label>
+    </div>
+    <div class="form-group">
+      <select class="form-control"
+              required="required"
+              id="category"
+              formControlName="category"
+              type="text"
+      >
+        <option *ngFor="let category of jobCategories" [ngValue]="category.name">
+          {{category.name}}
+        </option>
+      </select>
+      <label class="form-label"
+             for="category"
+      >
+        Category
+      </label>
+    </div>
+    <button class="floating-btn" type="submit"
+            [disabled]="formGroup.invalid"><i class="icon-arrow"></i></button>
+  </form>
+</div>
