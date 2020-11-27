@@ -6,6 +6,7 @@ import {OrganizationJobsCardListComponent} from "./components/organization-jobs-
 import {ProfileComponent} from "../../shared/components/profile/profile.component";
 import {JobEditComponent} from "./components/job-edit/job-edit.component";
 import {JobPageComponent} from "../../shared/components/job-page/job-page.component";
+import {UserCardListComponent} from "./components/user-card-list/user-card-list.component";
 
 const routes: Route[] = [
   {
@@ -35,6 +36,10 @@ const routes: Route[] = [
       {
         path: 'jobs/:id',
         component: JobPageComponent
+      },
+      {
+        path: 'applicants/jobs/:id',
+        component: UserCardListComponent
       }
     ]
   }

@@ -12,12 +12,18 @@ import { OrganizationMainComponent } from './components/organization-main/organi
 import { OrganizationJobsCardListComponent } from './components/organization-jobs-card-list/organization-jobs-card-list.component';
 import {OrganizationDashboardRoutingModule} from "./organization-dashboard-routing.module";
 import { JobEditComponent } from './components/job-edit/job-edit.component';
+import { UserCardListComponent } from './components/user-card-list/user-card-list.component';
+import { UserCardListViewComponent } from './components/user-card-list-view/user-card-list-view.component';
+import { UserCardItemComponent } from './components/user-card-item/user-card-item.component';
 
 @NgModule({
   declarations: [
   OrganizationMainComponent,
   OrganizationJobsCardListComponent,
-  JobEditComponent],
+  JobEditComponent,
+  UserCardListComponent,
+  UserCardListViewComponent,
+  UserCardItemComponent],
   imports: [
     CommonModule,
     SharedModule,

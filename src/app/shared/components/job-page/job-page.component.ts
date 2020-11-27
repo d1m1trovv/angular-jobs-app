@@ -6,6 +6,7 @@ import {JobsService} from "../jobs/services/jobs.service";
 import {Job} from "../jobs/models/job.interface";
 import {Application} from "../jobs/models/application.interface";
 import {AuthenticationService} from "../../../auth/services/authentication.service";
+import {Like} from "../jobs/models/like.interface";
 
 @Component({
   selector: 'app-job-page',
@@ -16,12 +17,16 @@ export class JobPageComponent implements OnInit, OnDestroy {
 
   job: Job;
   currentUserId: number = 0;
+  jobLikes: Like[];
+
   hasUserApplied: boolean = false;
   hasUserLiked: boolean = false;
   isUserStandard: boolean = false;
+  isJobOwner: boolean = false;
 
   hasUserApplied$ = new BehaviorSubject<boolean>(false);
   hasUserLiked$ = new BehaviorSubject<boolean>(false);
+  isJobOwner$ = new BehaviorSubject<boolean>(false);
   destroy$ = new Subject<boolean>();
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -36,6 +41,8 @@ export class JobPageComponent implements OnInit, OnDestroy {
       type: '',
       category: ''
     }
+
+    this.jobLikes = [];
   }
 
   ngOnInit(): void {
@@ -52,6 +59,8 @@ export class JobPageComponent implements OnInit, OnDestroy {
 
       if(id){
         this.getJob(id);
+        this.getJobLikes();
+        this.getIsUserApplied();
       }
     })
 
@@ -62,6 +71,10 @@ export class JobPageComponent implements OnInit, OnDestroy {
     this.getHasUserLiked().pipe(
       takeUntil(this.destroy$)
     ).subscribe(hasLiked => this.hasUserLiked = hasLiked);
+
+    this.getIsJobOwner().pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(isOwner => this.isJobOwner = isOwner);
   }
 
   ngOnDestroy(): void {
@@ -69,11 +82,17 @@ export class JobPageComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
+  onViewApplicants(): void{
+    this.router.navigate(['/organization', 'applicants', 'jobs', this.job.id])
+  }
+
   private getJob(id: number): void{
     this.jobsService.getJobById(id).pipe(
       takeUntil(this.destroy$)
     ).subscribe((response) => {
       this.job = response;
+
+      this.getIsJobOwner();
     })
   }
 
@@ -82,53 +101,133 @@ export class JobPageComponent implements OnInit, OnDestroy {
       user_id: this.currentUserId,
       job_id: this.job.id
     }
-    if (app) {
-      this.jobsService.postApplications({...app}).pipe(
-        take(1)
-      ).subscribe(() => {
-          this.router.navigate(['main/applications']);
-        },
-        (error => {
-          console.log(error);
-        })
-      )
-    }
+
+    this.jobsService.getApplications().pipe(
+      map((stream: Application[]) => stream.find(tempApp => tempApp.job_id === this.job.id
+      && tempApp.user_id === this.currentUserId)),
+      takeUntil(this.destroy$)
+    ).subscribe((response) => {
+      if(response){
+
+        return;
+      }
+    })
+
+    this.jobsService.createApplication(app).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
+      this.getIsUserApplied();
+
+      this.setHasUserApplied(true);
+    }, (error) => {
+      console.log(error);
+    })
+  }
+
+  onUnApply(): void{
+    this.jobsService.getApplications().pipe(
+      map((stream: Application[]) => stream.find(tempApp => tempApp.user_id === this.currentUserId
+      && tempApp.job_id === this.job.id)),
+      takeUntil(this.destroy$)
+    ).subscribe((response) => {
+      if(response){
+        this.deleteApplication(response);
+
+        this.setHasUserApplied(false);
+      }
+    })
+  }
+
+  deleteApplication(app: Application): void{
+    this.jobsService.deleteApplication(app.id!).pipe(
+      take(1)
+    ).subscribe(() => {
+      this.getIsUserApplied();
+    })
+  }
+
+  getIsUserApplied(): void{
+    this.jobsService.getApplications().pipe(
+      map((stream: Application[]) => stream.find(tempApp => tempApp.job_id === this.job.id
+      && tempApp.user_id === this.currentUserId)),
+      takeUntil(this.destroy$)
+    ).subscribe((response) => {
+      if(response){
+        this.setHasUserApplied(true);
+      }
+    }, (error) => {
+      console.log(error);
+    })
   }
 
   onLike(): void{
-
-    const job: Job = {
-      ...this.job,
-      likes: this.job.likes + 1
+    const like: Like = {
+      job_id: this.job.id,
+      user_id: this.currentUserId
     }
 
-    this.jobsService.updateJob(job).pipe(
+    this.jobsService.getLikes().pipe(
+      map((stream: Like[]) => stream.find(tempLike => tempLike.job_id === like.job_id
+        && tempLike.user_id === like.user_id)),
       takeUntil(this.destroy$)
-    ).subscribe(() =>{
+    ).subscribe((response) => {
+      if(response){
+
+        return;
+      }
+    })
+
+    this.jobsService.createLike(like).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
+      this.getJobLikes();
+
       this.setHasUserLiked(true);
-    },
-      (error => {
-        console.log(error);
-      })
-      )
+    }, (error) => {
+      console.log(error);
+    })
   }
 
   onUnLike(): void{
-
-    const job: Job = {
-      ...this.job,
-      likes: this.job.likes - 1
-    }
-
-    this.jobsService.updateJob(job).pipe(
+    this.jobsService.getLikes().pipe(
+      map((stream: Like[]) => stream.find(like => like.user_id === this.currentUserId
+        && like.job_id === this.job.id)),
       takeUntil(this.destroy$)
-    ).subscribe(() =>{
+    ).subscribe((response) => {
+      if(response){
+        this.deleteLike(response);
+
         this.setHasUserLiked(false);
-      },
-      (error => {
-        console.log(error);
-      })
-    )
+      }
+    }, (error) => {
+      console.log(error);
+    })
+  }
+
+  private deleteLike(like: Like): void{
+    this.jobsService.deleteLike(like.id!).pipe(
+      take(1)
+    ).subscribe(() => {
+      this.getJobLikes();
+    })
+  }
+
+  private getJobLikes(): void{
+    console.log(this.job.id);
+    this.jobsService.getLikes().pipe(
+      map((stream: Like[]) => stream.filter(tempLike => tempLike.job_id === this.job.id)),
+      takeUntil(this.destroy$)
+    ).subscribe((response) => {
+      this.jobLikes = response;
+      console.log(response);
+      for(let like of response){
+        if(like.user_id === this.currentUserId){
+          this.setHasUserLiked(true);
+        }
+      }
+    }, (error) => {
+      console.log(error);
+    })
   }
 
   checkIfUserApplied(): void{
@@ -144,13 +243,32 @@ export class JobPageComponent implements OnInit, OnDestroy {
     })
   }
 
-  setHasUserApplied(hasApplied: boolean){
+  checkIfJobOwner(): void{
+    if(this.job.organization === this.authenticationService.getLoggedUser().displayName){
+      this.setIsJobOwner(true);
+      console.log(this.job.organization);
+      console.log(this.authenticationService.getLoggedUser().displayName)
+      return;
+    }
+
+    this.setIsJobOwner(false);
+  }
+
+  setHasUserApplied(hasApplied: boolean): void{
     this.hasUserApplied$.next(hasApplied);
   }
 
   getHasUserApplied(): Observable<boolean>{
-    this.checkIfUserApplied();
     return this.hasUserApplied$.asObservable();
+  }
+
+  setIsJobOwner(isOwner: boolean): void{
+    this.isJobOwner$.next(isOwner);
+  }
+
+  getIsJobOwner(): Observable<boolean>{
+    this.checkIfJobOwner();
+    return this.isJobOwner$.asObservable();
   }
 
   setHasUserLiked(hasApplied: boolean){

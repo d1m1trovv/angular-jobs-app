@@ -55,6 +55,7 @@ export class AuthenticationService{
     localStorage.removeItem('loggedInUser');
 
     this.setIsUserLogged();
+
   }
 
   getLoggedUser(): User{
@@ -76,6 +77,8 @@ export class AuthenticationService{
     let userType = this.getLoggedUser().type;
     if(userType && userType === 'standard'){
       this.isUserStandard$.next(true)
+
+      return;
     }
     this.isUserStandard$.next(false);
   }

@@ -31,6 +31,33 @@
       "confirmPassword": "orgpass",
       "type": "organization",
       "id": 4
+    },
+    {
+      "displayName": "Goshko",
+      "username": "goshko123",
+      "email": "gosho@abv.bg",
+      "password": "goshopass",
+      "confirmPassword": "goshopass",
+      "type": "standard",
+      "id": 5
+    },
+    {
+      "displayName": "Gosho",
+      "username": "gosho",
+      "email": "gosho1@abv.bg",
+      "password": "goshopass",
+      "confirmPassword": "goshopass",
+      "type": "standard",
+      "id": 6
+    },
+    {
+      "displayName": "UserTest",
+      "username": "UserTest",
+      "email": "user@abv.bg",
+      "password": "userpass",
+      "confirmPassword": "userpass",
+      "type": "standard",
+      "id": 7
     }
   ],
   "jobs": [
@@ -80,10 +107,10 @@
       "category": "Software development"
     },
     {
-      "id": 6,
-      "title": "React developer",
+      "id": 7,
+      "title": ".Net developer",
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      "type": "Part-time",
+      "type": "Remote",
       "category": "Software development",
       "organization": "Organization",
       "likes": 0
@@ -161,6 +188,33 @@
       "job_id": 5,
       "id": 4,
       "status": "Waiting"
+    },
+    {
+      "user_id": 5,
+      "job_id": 3,
+      "id": 5
+    },
+    {
+      "user_id": 5,
+      "job_id": 7,
+      "id": 6
+    }
+  ],
+  "job_likes": [
+    {
+      "id": 1,
+      "job_id": 1,
+      "user_id": 1
+    },
+    {
+      "job_id": 3,
+      "user_id": 6,
+      "id": 3
+    },
+    {
+      "job_id": 3,
+      "user_id": 5,
+      "id": 4
     }
   ]
 }

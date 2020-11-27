@@ -18,7 +18,7 @@
         <div class="description text-center">
           <p>{{job.description}}</p>
           <br>
-          <p>Likes: {{job.likes}}</p>
+          <p>Likes : {{jobLikes.length}}</p>
           <br>
           <ng-container *ngIf="hasUserApplied">
           <p style="color: #872642; font-size: 45px">You have applied for this job</p>
@@ -29,25 +29,53 @@
           <div class="col-md-6 ml-auto mr-auto">
             <div class="profile-tabs">
               <div class="butn">
-                <a class="transparent" *ngIf="!isUserStandard" (click)="onRedirect('organization/my-jobs/edit/' + job.id)">
+                <a class="transparent" *ngIf="!isUserStandard && isJobOwner" (click)="onRedirect('organization/my-jobs/edit/' + job.id)">
                   <p>
                     <span class="bg"></span>
                     <span class="base"></span>
                     <span class="text">Edit</span>
                   </p>
                 </a>
-                <a class="transparent" *ngIf="!isUserStandard" (click)="onDelete(job.id)">
+                <a class="transparent" *ngIf="!isUserStandard && isJobOwner" (click)="onDelete(job.id!)">
                   <p>
                     <span class="bg"></span>
                     <span class="base"></span>
                     <span class="text">Delete</span>
                   </p>
                 </a>
-                <a class="transparent" *ngIf="isUserStandard">
+                <a class="transparent" *ngIf="!isUserStandard && isJobOwner" (click)="onViewApplicants()">
+                  <p>
+                    <span class="bg"></span>
+                    <span class="base"></span>
+                    <span class="text">applicants</span>
+                  </p>
+                </a>
+                <a class="transparent" *ngIf="isUserStandard && !hasUserLiked" (click)="onLike()">
                   <p>
                     <span class="bg"></span>
                     <span class="base"></span>
                     <span class="text">Like</span>
+                  </p>
+                </a>
+                <a class="transparent" *ngIf="isUserStandard && hasUserLiked" (click)="onUnLike()">
+                  <p>
+                    <span class="bg"></span>
+                    <span class="base"></span>
+                    <span class="text">Unlike</span>
+                  </p>
+                </a>
+                <a class="transparent" *ngIf="isUserStandard && !hasUserApplied" (click)="onApply()">
+                  <p>
+                    <span class="bg"></span>
+                    <span class="base"></span>
+                    <span class="text">Apply</span>
+                  </p>
+                </a>
+                <a class="transparent" *ngIf="isUserStandard && hasUserApplied" (click)="onUnApply()">
+                  <p>
+                    <span class="bg"></span>
+                    <span class="base"></span>
+                    <span class="text">Unapply</span>
                   </p>
                 </a>
               </div>

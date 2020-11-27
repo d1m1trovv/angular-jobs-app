@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 
       console.log(response.email);
       this.authenticationService.setLoggedUser(response);
-      this.checkType(response.type);
+      this.checkType(response.type!);
       console.log(response);
     });
   }
