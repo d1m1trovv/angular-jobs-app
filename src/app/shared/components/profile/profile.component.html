@@ -11,9 +11,6 @@
             <div class="name">
               <h3 class="title">{{user.displayName}}</h3>
               <h6>{{user.username}}</h6>
-              <a href="#pablo" class="btn btn-just-icon btn-link btn-dribbble"><i class="fa fa-dribbble"></i></a>
-              <a href="#pablo" class="btn btn-just-icon btn-link btn-twitter"><i class="fa fa-twitter"></i></a>
-              <a href="#pablo" class="btn btn-just-icon btn-link btn-pinterest"><i class="fa fa-pinterest"></i></a>
             </div>
           </div>
         </div>
@@ -24,12 +21,28 @@
       <div class="row">
         <div class="col-md-6 ml-auto mr-auto">
           <div class="profile-tabs">
-            <div class="three-inline-buttons">
+            <div class="butn">
+                <a class="transparent" [routerLink]="['/main', 'profile', 'edit', user.id]">
               <p>
-                <a class="btn btn-warning" [routerLink]="['/main', 'profile', 'edit', user.id]">Edit</a>
-                <a class="btn btn-warning" href="http://example/">Buy Now</a>
-                <a class="btn btn-warning" href="http://example/">Buy Now</a>
+                <span class="bg"></span>
+                <span class="base"></span>
+                <span class="text">Edit</span>
               </p>
+              </a>
+              <a class="transparent" *ngIf="isUserStandard" (click)="deleteUser()">
+                <p>
+                  <span class="bg"></span>
+                  <span class="base"></span>
+                  <span class="text">Delete</span>
+                </p>
+              </a>
+              <a class="transparent" *ngIf="!isUserStandard" (click)="deleteOrganization()">
+                <p>
+                  <span class="bg"></span>
+                  <span class="base"></span>
+                  <span class="text">Delete O</span>
+                </p>
+              </a>
             </div>
           </div>
         </div>

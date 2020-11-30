@@ -5,9 +5,10 @@
   <div class="job-title">{{user.displayName}}</div>
   <div class="company-name">{{user.email}}</div>
   <div class="skills-container">
-    <div class="skill ml-4"></div>
-    <div class="skill ml-2"></div>
+    <div class="skill ml-4">Status: {{app.status}}</div>
   </div>
-  <button class="save">Read more</button>
+  <button class="reject">Reject</button>
+  <a></a>
+  <button class="accept" (click)="onAccept()">Accept</button>
   <a></a>
 </article>

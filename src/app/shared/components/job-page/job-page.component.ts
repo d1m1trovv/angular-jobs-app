@@ -18,6 +18,7 @@ export class JobPageComponent implements OnInit, OnDestroy {
   job: Job;
   currentUserId: number = 0;
   jobLikes: Like[];
+  app: Application;
 
   hasUserApplied: boolean = false;
   hasUserLiked: boolean = false;
@@ -42,6 +43,8 @@ export class JobPageComponent implements OnInit, OnDestroy {
       category: ''
     }
 
+    this.app = {};
+
     this.jobLikes = [];
   }
 
@@ -52,6 +55,8 @@ export class JobPageComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(isStandard => this.isUserStandard = isStandard);
 
+    console.log('Is standard: ' + this.isUserStandard);
+
     this.activatedRoute.params.pipe(
       takeUntil(this.destroy$)
     ).subscribe((params) => {
@@ -61,6 +66,7 @@ export class JobPageComponent implements OnInit, OnDestroy {
         this.getJob(id);
         this.getJobLikes();
         this.getIsUserApplied();
+        this.getApplication();
       }
     })
 
@@ -93,6 +99,20 @@ export class JobPageComponent implements OnInit, OnDestroy {
       this.job = response;
 
       this.getIsJobOwner();
+    })
+  }
+
+  private getApplication(): void{
+    this.jobsService.getApplications().pipe(
+      map((stream: Application[]) => stream.find(tempApp => tempApp.user_id === this.currentUserId
+      && tempApp.job_id === this.job.id)),
+      takeUntil(this.destroy$)
+    ).subscribe((response) => {
+      if(response){
+        this.app = response;
+      }
+    }, (error) => {
+      console.log(error);
     })
   }
 

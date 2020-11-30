@@ -1,36 +1,12 @@
 {
   "users": [
     {
-      "displayName": "Admin",
-      "username": "AdminName",
-      "email": "admin123@abv.bg",
-      "password": "adminpass",
-      "id": 1
-    },
-    {
-      "displayName": "UserName",
-      "username": "UserName",
-      "email": "admintest@abv.bg",
-      "password": "userpass",
-      "confirmPassword": "userpass",
-      "id": 2
-    },
-    {
       "displayName": "UserName2",
       "username": "UserName2",
       "email": "admintest@abv.bg",
       "password": "123456",
       "confirmPassword": "123456",
       "id": 3
-    },
-    {
-      "displayName": "Organization",
-      "username": "Organization",
-      "email": "org@abv.bg",
-      "password": "orgpass",
-      "confirmPassword": "orgpass",
-      "type": "organization",
-      "id": 4
     },
     {
       "displayName": "Goshko",
@@ -58,6 +34,15 @@
       "confirmPassword": "userpass",
       "type": "standard",
       "id": 7
+    },
+    {
+      "displayName": "TestSoft",
+      "username": "testsoft",
+      "email": "testsoft@abv.bg",
+      "password": "testpass",
+      "confirmPassword": "testpass",
+      "type": "organization",
+      "id": 8
     }
   ],
   "jobs": [
@@ -107,12 +92,21 @@
       "category": "Software development"
     },
     {
+      "id": 6,
+      "title": "C++ Developer",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "type": "Part-time",
+      "category": "Software development",
+      "organization": "TestSoft",
+      "likes": 0
+    },
+    {
       "id": 7,
-      "title": ".Net developer",
+      "title": "Full Stack Developer",
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "type": "Remote",
       "category": "Software development",
-      "organization": "Organization",
+      "organization": "TestSoft",
       "likes": 0
     }
   ],
@@ -195,9 +189,32 @@
       "id": 5
     },
     {
+      "id": 6,
       "user_id": 5,
       "job_id": 7,
-      "id": 6
+      "status": "Accepted"
+    },
+    {
+      "user_id": 5,
+      "job_id": 9,
+      "id": 7
+    },
+    {
+      "user_id": 5,
+      "job_id": 10,
+      "id": 8
+    },
+    {
+      "id": 9,
+      "user_id": 5,
+      "job_id": 11,
+      "status": "Accepted"
+    },
+    {
+      "id": 10,
+      "user_id": 5,
+      "job_id": 6,
+      "status": "Accepted"
     }
   ],
   "job_likes": [
@@ -215,6 +232,26 @@
       "job_id": 3,
       "user_id": 5,
       "id": 4
+    },
+    {
+      "job_id": 7,
+      "user_id": 5,
+      "id": 5
+    },
+    {
+      "job_id": 8,
+      "user_id": 5,
+      "id": 6
+    },
+    {
+      "job_id": 9,
+      "user_id": 5,
+      "id": 7
+    },
+    {
+      "job_id": 11,
+      "user_id": 5,
+      "id": 8
     }
   ]
 }

@@ -28,6 +28,10 @@ export class JobsService{
     return forkJoin([jobs, types, categories]);
   }
 
+  getAllJobs(): Observable<Job[]>{
+    return this.http.get<Job[]>(this.url);
+  }
+
   getApplications(): Observable<Application[]>{
     return this.http.get<Application[]>(this.appsUrl);
   }
@@ -40,6 +44,12 @@ export class JobsService{
     const url = `${this.appsUrl}/${id}`;
 
     return this.http.delete(url);
+  }
+
+  updateApplication(app: Application): Observable<any>{
+    const url = `${this.appsUrl}/${app.id}`
+
+    return this.http.put(url, app);
   }
 
   getJobById(id: number): Observable<Job>{

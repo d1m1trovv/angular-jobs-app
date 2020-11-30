@@ -33,6 +33,12 @@ export class AuthenticationService{
     return this.http.put(url, user);
   }
 
+  deleteUser(id: number): Observable<any>{
+    const url = `${this.url}/${id}`
+
+    return this.http.delete(url);
+  }
+
   login(email: string, password: string): Observable<User|undefined>{
     return this.getUsers().pipe(
       map((stream: User[]) => stream.find(user => user.email === email && user.password === password)),
